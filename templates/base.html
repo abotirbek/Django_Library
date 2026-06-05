@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Manager</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            background:#f5f7fb;
+            min-height:100vh;
+        }
+
+        /* NAVBAR */
+        .navbar{
+            width:90%;
+            max-width:1200px;
+            margin:20px auto;
+            padding:16px 30px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            background:rgba(255,255,255,0.95);
+            backdrop-filter:blur(12px);
+
+            border-radius:18px;
+
+            box-shadow:
+                0 8px 24px rgba(0,0,0,0.08),
+                0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        /* LOGO */
+        .logo{
+            font-size:1.5rem;
+            font-weight:700;
+
+            background:linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        /* LINKS */
+        .nav-links{
+            list-style:none;
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .nav-links li{
+            position:relative;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:#444;
+            font-weight:500;
+            padding:10px 16px;
+            border-radius:10px;
+            transition:0.25s ease;
+        }
+
+        .nav-links a:hover{
+            background:#eef2ff;
+            color:#4f46e5;
+        }
+
+        /* CREATE BUTTON */
+        .nav-links .create-btn{
+            background:linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            color:white;
+        }
+
+        .nav-links .create-btn:hover{
+            color:white;
+            transform:translateY(-2px);
+            box-shadow:0 8px 16px rgba(99,102,241,.25);
+        }
+
+        /* DROPDOWN */
+        .dropdown-menu{
+            position:absolute;
+            top:48px;
+            right:0;
+
+            width:200px;
+            list-style:none;
+
+            background:white;
+            border-radius:14px;
+
+            box-shadow:
+                0 12px 28px rgba(0,0,0,.08);
+
+            overflow:hidden;
+
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(10px);
+
+            transition:all .25s ease;
+        }
+
+        .dropdown:hover .dropdown-menu{
+            opacity:1;
+            visibility:visible;
+            transform:translateY(0);
+        }
+
+        .dropdown-menu li a{
+            display:block;
+            padding:12px 16px;
+            border-radius:0;
+        }
+
+        .dropdown-menu li a:hover{
+            background:#f8fafc;
+        }
+
+        /* PAGE CONTENT */
+        .page-container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+        }
+
+        @media(max-width:768px){
+
+            .navbar{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .nav-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            📚 BookHub
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="{% url 'create' %}" class="create-btn">
+                    + Create Book
+                </a>
+            </li>
+
+            <li class="dropdown">
+
+                <a href="#">
+                    Menu ▾
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="/">All Books</a></li>
+                    <li><a href="#">Authors</a></li>
+                    <li><a href="#">Publishers</a></li>
+                    <li><a href="#">Recently Added</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="page-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

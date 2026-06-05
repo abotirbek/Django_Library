@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ book.title|default:"Book Detail" }}</title>
+
+<style>
+:root{
+    --primary:#4f46e5;
+    --primary-dark:#4338ca;
+    --text:#1f2937;
+    --muted:#6b7280;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#f8fafc);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.card{
+    width:100%;
+    max-width:900px;
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.image{
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+    color:#fff;
+}
+
+.content{
+    padding:40px;
+}
+
+.meta{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.title{
+    font-size:30px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.author{
+    font-size:16px;
+    color:var(--muted);
+    margin-bottom:15px;
+}
+
+.desc{
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.box{
+    background:#f8fafc;
+    padding:14px;
+    border-radius:12px;
+}
+
+.label{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.value{
+    margin-top:5px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+}
+
+.btn{
+    flex:1;
+    text-align:center;
+    padding:12px;
+    border-radius:12px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.primary{
+    background:var(--primary);
+    color:#fff;
+}
+
+.primary:hover{
+    background:var(--primary-dark);
+}
+
+.secondary{
+    border:1px solid #d1d5db;
+    color:var(--text);
+}
+
+.secondary:hover{
+    background:#f3f4f6;
+}
+
+@media(max-width:768px){
+    .card{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="image">
+        📚
+    </div>
+
+    <div class="content">
+
+        <div class="meta">
+            Book #{{ book.id }}
+        </div>
+
+        <div class="title">
+            {{ book.title }}
+        </div>
+
+        <div class="author">
+            by {{ book.author }}
+        </div>
+
+        <div class="desc">
+            {{ book.description|default:"No description available." }}
+        </div>
+
+        <div class="grid">
+
+            <div class="box">
+                <div class="label">ISBN</div>
+                <div class="value">{{ book.isbn }}</div>
+            </div>
+
+            <div class="box">
+                <div class="label">Pages</div>
+                <div class="value">{{ book.pages }}</div>
+            </div>
+
+            <div class="box">
+                <div class="label">Publisher</div>
+                <div class="value">{{ book.publisher }}</div>
+            </div>
+
+            <div class="box">
+                <div class="label">Publication Date</div>
+                <div class="value">
+                    {{ book.publication_date|date:"M d, Y" }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'home' %}" class="btn secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
