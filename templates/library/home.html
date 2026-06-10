@@ -42,6 +42,18 @@
         margin-bottom: 12px;
     }
 
+    .book-image {
+        margin-bottom: 12px;
+    }
+
+    .book-image img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+    }
+
     .badges {
         display: flex;
         gap: 8px;
@@ -157,6 +169,14 @@
 
         <div class="book-title">
             {{ book.title }}
+        </div>
+
+        <div class="book-image">
+            {% if book.image %}
+                <img src="{{ book.image.url }}" alt="{{ book.title }}">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
         </div>
 
         <div class="book-author">

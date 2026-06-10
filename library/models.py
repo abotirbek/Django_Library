@@ -1,11 +1,10 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/covers', blank=True, null=True)
     author = models.CharField(max_length=255)
     isbn = models.CharField(max_length=20, unique=True)
     publisher = models.CharField(max_length=255)
