@@ -17,3 +17,15 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+class Course(models.Model):
+    title = models.CharField(max_length=300)
+    price = models.IntegerField()
+
+class  Group(models.Model):
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+    title = models.CharField(max_length=300)
+    student_count = models.IntegerField()
+
+    def __str__(self):
+        return self.title

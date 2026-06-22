@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .forms import BookForm
 from .models import Book
 
 # Create your views here.
@@ -8,27 +9,13 @@ def get_all_books(request):
 
 def create_book(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        image = request.FILES.get('image')
-        author = request.POST.get('author')
-        isbn = request.POST.get('isbn')
-        publisher = request.POST.get('publisher')
-        publication_date = request.POST.get('publication_date')
-        pages = request.POST.get('pages')
-        description = request.POST.get('description')
-        if all([title, author, isbn, publisher, publication_date, pages, description]):
-            Book.objects.create(
-                title = title,
-                image = image,
-                author = author,
-                isbn = isbn,
-                publisher = publisher,
-                publication_date = publication_date,
-                pages = pages,
-                description = description
-            )
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
             return redirect('home')
-    return render(request,'library/create.html')
+    else:
+        form = BookForm()
+    return render(request,'library/create.html',{'form':form})
 
 def read_book(request,pk):
     book = Book.objects.get(pk=pk)
