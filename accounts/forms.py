@@ -1,22 +1,22 @@
 from django import forms
-from django.contrib.auth.models import User
+from .models import CustomUser, Profile
 
 class RegistrationForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = CustomUser
         fields = [
             'username',
-            'first_name',
-            'last_name',
             'email',
+            'phone',
+            'telegram_username',
             'password',
         ]
 
     def save(self, commit = True, **kwargs):
-        return User.objects.create_user(
+        return CustomUser.objects.create_user(
             username=self.cleaned_data.get('username'),
-            first_name=self.cleaned_data.get('first_name'),
-            last_name=self.cleaned_data.get('last_name'),
+            phone=self.cleaned_data.get('phone'),
+            telegram_username=self.cleaned_data.get('telegram_username'),
             email=self.cleaned_data.get('email'),
             password=self.cleaned_data.get('password'),
         )
@@ -24,3 +24,11 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(max_length=150)
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'birth_date',
+            'bio',
+        ]

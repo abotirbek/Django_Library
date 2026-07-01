@@ -163,7 +163,7 @@
     <nav class="navbar">
 
         <div class="logo">
-            📚 BookHub
+            Welcome <a href="{% url 'profile' %}">{{ request.user.username }}</a>
         </div>
 
         <ul class="nav-links">
